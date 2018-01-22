@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<persistence xmlns="http://xmlns.jcp.org/xml/ns/persistence"
+             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="2.1"
+             xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd">
+
+    <persistence-unit name="books" transaction-type="JTA">
+        <description>Persistence Unit for Books</description>
+        <jta-data-source>jdbc/books</jta-data-source>
+        <exclude-unlisted-classes>false</exclude-unlisted-classes>
+        <properties>
+            <property name="javax.persistence.jdbc.url" value="jdbc:h2:mem:books"/>
+            <property name="javax.persistence.jdbc.driver" value="org.h2.Driver"/>
+
+            <property name="javax.persistence.schema-generation.database.action" value="create"/>
+            <property name="javax.persistence.sql-load-script-source" value="META-INF/books.sql"/>
+        </properties>
+    </persistence-unit>
+</persistence>
