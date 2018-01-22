@@ -2,6 +2,8 @@ package com.packtpub.javaee8.domain;
 
 import javax.json.bind.annotation.JsonbPropertyOrder;
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.Collection;
 
 /**
  * The main book entity.
@@ -22,6 +24,9 @@ public class Book {
 
     @Embedded
     private Author author;
+
+    @OneToMany(mappedBy = "book", cascade = CascadeType.ALL, orphanRemoval = true)
+    private Collection<Loan> loans = new ArrayList<>();
 
     public String getIsbn() {
         return isbn;
@@ -45,6 +50,24 @@ public class Book {
 
     public void setAuthor(Author author) {
         this.author = author;
+    }
+
+    public Collection<Loan> getLoans() {
+        return loans;
+    }
+
+    public void setLoans(Collection<Loan> loans) {
+        this.loans = loans;
+    }
+
+    public void addLoan(Loan loan) {
+        loan.setBook(this);
+        loans.add(loan);
+    }
+
+    public void removeLoan(Loan loan) {
+        loans.remove(loan);
+        loan.setBook(null);
     }
 
     @Override

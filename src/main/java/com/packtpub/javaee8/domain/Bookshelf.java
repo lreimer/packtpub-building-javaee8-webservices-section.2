@@ -20,7 +20,6 @@ public class Bookshelf {
 
     @Inject
     private EntityManager entityManager;
-
     @Inject
     private Logger logger;
 
