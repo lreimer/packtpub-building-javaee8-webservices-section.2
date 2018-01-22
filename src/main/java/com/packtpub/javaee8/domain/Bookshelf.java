@@ -28,6 +28,16 @@ public class Bookshelf {
     }
 
     /**
+     * Find the book by its ISBN and return a reference to it.
+     *
+     * @param isbn the ISBN
+     * @return the book
+     */
+    public Book findByISBN(String isbn) {
+        return entityManager.getReference(Book.class, Objects.requireNonNull(isbn));
+    }
+
+    /**
      * Creates a new book in the bookshelf.
      *
      * @param book a book to create
@@ -57,4 +67,5 @@ public class Bookshelf {
         Book reference = entityManager.getReference(Book.class, isbn);
         entityManager.remove(reference);
     }
+
 }
