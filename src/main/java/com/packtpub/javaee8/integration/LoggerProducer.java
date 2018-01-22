@@ -1,8 +1,8 @@
 package com.packtpub.javaee8.integration;
 
 import javax.enterprise.context.Dependent;
+import javax.enterprise.inject.Produces;
 import javax.enterprise.inject.spi.InjectionPoint;
-import javax.ws.rs.Produces;
 import java.util.logging.Logger;
 
 /**
