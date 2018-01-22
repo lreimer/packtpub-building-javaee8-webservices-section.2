@@ -4,6 +4,7 @@ import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
+import javax.transaction.Transactional;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Objects;
@@ -14,6 +15,7 @@ import java.util.logging.Logger;
  * The Bookshelf implementation is used to find and managed books.
  */
 @ApplicationScoped
+@Transactional(Transactional.TxType.REQUIRED)
 public class Bookshelf {
 
     @Inject
@@ -40,7 +42,7 @@ public class Bookshelf {
      * @return the book
      */
     public Book findByISBN(String isbn) {
-        logger.log(Level.INFO, "Find book with ISBN {1}.", isbn);
+        logger.log(Level.INFO, "Find book with ISBN {0}.", isbn);
         return entityManager.getReference(Book.class, Objects.requireNonNull(isbn));
     }
 
@@ -77,5 +79,4 @@ public class Bookshelf {
         Book reference = entityManager.getReference(Book.class, isbn);
         entityManager.remove(reference);
     }
-
 }
