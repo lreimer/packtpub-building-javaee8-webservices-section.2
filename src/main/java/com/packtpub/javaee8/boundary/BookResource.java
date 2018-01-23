@@ -3,8 +3,11 @@ package com.packtpub.javaee8.boundary;
 import com.packtpub.javaee8.domain.Book;
 import com.packtpub.javaee8.domain.Bookshelf;
 
+import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
 import javax.ws.rs.*;
+import javax.ws.rs.container.ResourceContext;
+import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriBuilder;
@@ -15,10 +18,13 @@ import java.util.logging.Logger;
  * The Book REST resource implementation.
  */
 @Path("books")
+@RequestScoped
 public class BookResource {
 
     @Inject
     private Bookshelf bookshelf;
+    @Context
+    private ResourceContext context;
     @Inject
     private Logger logger;
 
@@ -59,5 +65,15 @@ public class BookResource {
     public Response delete(@PathParam("isbn") String isbn) {
         bookshelf.delete(isbn);
         return Response.ok().build();
+    }
+
+    @Path("/{isbn}/loans")
+    public LoanResource loans(@PathParam("isbn") String isbn) {
+        logger.info("Initialize and return Subresource locator for Loans.");
+
+        LoanResource loanResource = context.getResource(LoanResource.class);
+        loanResource.setIsbn(isbn);
+
+        return loanResource;
     }
 }
