@@ -42,6 +42,14 @@ public class LoanResource {
         return Response.ok(book.getLoans()).build();
     }
 
+    @GET
+    @Path("/{loanId}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response loan(@PathParam("loanId") String loanId) {
+        Loan loan = library.loanInfo(loanId);
+        return Response.ok(loan).build();
+    }
+
     @DELETE
     @Path("/{loanId}")
     public Response returnBook(@PathParam("loanId") String loanId) {

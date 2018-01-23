@@ -27,6 +27,15 @@ public class Book {
     @Embedded
     private Author author;
 
+    public Book() {
+    }
+
+    public Book(String isbn, String title, Author author) {
+        this.isbn = isbn;
+        this.title = title;
+        this.author = author;
+    }
+
     @OneToMany(mappedBy = "book", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Loan> loans = new ArrayList<>();
 

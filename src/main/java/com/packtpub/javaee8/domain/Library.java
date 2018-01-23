@@ -41,4 +41,15 @@ public class Library {
         Book book = entityManager.getReference(Book.class, isbn);
         book.addLoan(loan);
     }
+
+    /**
+     * Get the loan identified by its ID.
+     *
+     * @param loanId the loan ID
+     * @return the loan
+     */
+    public Loan loanInfo(String loanId) {
+        logger.log(Level.INFO, "Getting loan with ID {0}.", loanId);
+        return entityManager.getReference(Loan.class, loanId);
+    }
 }

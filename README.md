@@ -46,6 +46,12 @@ HTTP status code.
 * The final and most flexible option is to implement the `ExceptionMapper` interface
 and perform a custom mapping from exception to `Response`.
 
+### Video 2.4: JAX-RS Client API
+
+In this video we add a small standalone CLI client program that uses
+the JAX-RS Client APIs to access the Library Service REST API. The
+client performs several CRUD interactions with `Book` and `Loan`. 
+
 ## Containerization
 
 When you want to use the Payara Server Full base image, write the following `Dockerfile`:
