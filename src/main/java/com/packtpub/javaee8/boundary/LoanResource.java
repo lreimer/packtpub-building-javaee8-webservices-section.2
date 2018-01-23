@@ -15,7 +15,9 @@ import java.net.URI;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-@Path("/")
+/**
+ * Sub REST resource implementation for loans.
+ */
 @RequestScoped
 public class LoanResource {
 
