@@ -30,6 +30,22 @@ Now there are several ways to implement Subresource locators. In all cases
 you can perform partial processing by annotating methods using @Path only.
 The return type will then be scanned for further JAX-RS annotations.
 
+### Video 2.3: Error Handling
+
+For REST APIs it is considered best practice to signal errors and abnormal
+behaviour using HTTP Status code. This includes expected as well as unexpected
+exceptional behaviour.
+
+There are a couple of options you can choose from:
+* Handle the error explicitly, by checking or catching an exception and then
+set a suitable HTTP status code on the `Response` object. This could be a *404*
+if something could not be found.
+* The other alternative you have is to throw `WebApplicationException` or one
+of its subclasses. JAX-RS will handle these and translate them to the appropriate
+HTTP status code.
+* The final and most flexible option is to implement the `ExceptionMapper` interface
+and perform a custom mapping from exception to `Response`.
+
 ## Containerization
 
 When you want to use the Payara Server Full base image, write the following `Dockerfile`:
