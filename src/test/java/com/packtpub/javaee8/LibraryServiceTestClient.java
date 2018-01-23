@@ -23,7 +23,7 @@ import java.util.logging.Logger;
  * A standalone JAX-RS client implementation for the
  * library service.
  */
-public class LibraryServiceClient {
+public class LibraryServiceTestClient {
 
     private static final Logger LOGGER = Logger.getAnonymousLogger();
 

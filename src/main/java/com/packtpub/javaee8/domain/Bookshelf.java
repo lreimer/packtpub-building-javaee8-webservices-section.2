@@ -1,5 +1,9 @@
 package com.packtpub.javaee8.domain;
 
+import lombok.AccessLevel;
+import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
+
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
@@ -16,6 +20,8 @@ import java.util.logging.Logger;
  */
 @ApplicationScoped
 @Transactional(Transactional.TxType.REQUIRED)
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
+@AllArgsConstructor(access = AccessLevel.PROTECTED)
 public class Bookshelf {
 
     @Inject
