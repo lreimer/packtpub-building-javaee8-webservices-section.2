@@ -4,6 +4,7 @@ import javax.json.bind.annotation.JsonbPropertyOrder;
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 
 /**
  * The main book entity.
@@ -26,7 +27,7 @@ public class Book {
     private Author author;
 
     @OneToMany(mappedBy = "book", cascade = CascadeType.ALL, orphanRemoval = true)
-    private Collection<Loan> loans = new ArrayList<>();
+    private List<Loan> loans = new ArrayList<>();
 
     public String getIsbn() {
         return isbn;
@@ -57,7 +58,8 @@ public class Book {
     }
 
     public void setLoans(Collection<Loan> loans) {
-        this.loans = loans;
+        this.loans.clear();
+        this.loans.addAll(loans);
     }
 
     public void addLoan(Loan loan) {
@@ -66,8 +68,11 @@ public class Book {
     }
 
     public void removeLoan(Loan loan) {
-        loans.remove(loan);
-        loan.setBook(null);
+        int index = loans.indexOf(loan);
+        if (index > -1) {
+            Loan l = loans.remove(index);
+            l.setBook(null);
+        }
     }
 
     @Override
