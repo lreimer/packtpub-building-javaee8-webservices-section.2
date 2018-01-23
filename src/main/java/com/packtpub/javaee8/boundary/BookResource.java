@@ -12,6 +12,7 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriBuilder;
 import java.net.URI;
+import java.util.Objects;
 import java.util.logging.Logger;
 
 /**
@@ -55,7 +56,11 @@ public class BookResource {
     @PUT
     @Path("/{isbn}")
     public Response update(@PathParam("isbn") String isbn, Book book) {
-        // TODO check of ISBN matches the Books ISBN
+        if (!Objects.equals(isbn, book.getIsbn())) {
+            // return Response.status(Response.Status.BAD_REQUEST).build();
+            // throw new WebApplicationException("ISBN must match path parameter.", Response.Status.BAD_REQUEST);
+            throw new BadRequestException("ISBN must match path parameter.");
+        }
         bookshelf.update(isbn, book);
         return Response.ok().build();
     }
