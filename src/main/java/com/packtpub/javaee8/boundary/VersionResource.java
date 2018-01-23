@@ -16,22 +16,22 @@ import java.util.logging.Logger;
 public class VersionResource {
 
     @Path("/v1")
-    public Class<Version1Resource> v1() {
+    public Class<V1> v1() {
         // this does not work due to injection
-        return Version1Resource.class;
+        return V1.class;
     }
 
     @Path("/v2")
-    public Class<Version2Resource> v2() {
+    public Class<V2> v2() {
         // this works
-        return Version2Resource.class;
+        return V2.class;
     }
 
     /**
      * This sub resource is a CDI bean, but injection does not work here.
      */
     @RequestScoped
-    public static class Version1Resource {
+    public static class V1 {
         @Inject
         private Logger logger;
 
@@ -46,9 +46,9 @@ public class VersionResource {
     /**
      * This sub resource does not use or require injection.
      */
-    public static class Version2Resource {
+    public static class V2 {
 
-        private final Logger logger = Logger.getLogger(Version2Resource.class.getName());
+        private final Logger logger = Logger.getLogger(V2.class.getName());
 
         @GET
         @Produces(MediaType.TEXT_PLAIN)
