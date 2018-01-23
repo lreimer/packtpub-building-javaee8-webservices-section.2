@@ -2,6 +2,7 @@ package com.packtpub.javaee8.domain;
 
 import javax.json.bind.annotation.JsonbPropertyOrder;
 import javax.persistence.*;
+import javax.ws.rs.Path;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -45,6 +46,7 @@ public class Book {
         this.title = title;
     }
 
+    @Path("/author")
     public Author getAuthor() {
         return author;
     }

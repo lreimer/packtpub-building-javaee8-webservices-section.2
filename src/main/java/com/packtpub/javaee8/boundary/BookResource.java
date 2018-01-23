@@ -67,6 +67,12 @@ public class BookResource {
         return Response.ok().build();
     }
 
+    @Path("/{isbn}/author")
+    public AuthorResource author(@PathParam("isbn") String isbn) {
+        Book book = bookshelf.findByISBN(isbn);
+        return new AuthorResource(book);
+    }
+
     @Path("/{isbn}/loans")
     public LoanResource loans(@PathParam("isbn") String isbn) {
         logger.info("Initialize and return Subresource locator for Loans.");
