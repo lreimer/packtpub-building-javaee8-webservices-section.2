@@ -45,7 +45,7 @@ public class LibraryServiceTestClient {
         LOGGER.log(Level.INFO, "Get unknown book by ISBN.");
         Response response = api.path("/books").path("/{isbn}").resolveTemplate("isbn", "1234567890")
                 .request().accept(MediaType.APPLICATION_JSON).get();
-        assert response.getStatus() == 201;
+        assert response.getStatus() == 404;
 
         Book book = new Book("1234567890", "Building Web Services with Java EE 8",
                 new Author("M.-Leander Reimer"));
