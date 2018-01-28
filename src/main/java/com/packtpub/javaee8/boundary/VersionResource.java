@@ -23,7 +23,7 @@ public class VersionResource {
 
     @Path("/v2")
     public Class<Version2Resource> v2() {
-        // this works
+        // this works because no injection is required
         return Version2Resource.class;
     }
 
