@@ -19,6 +19,17 @@ public class Library {
     private Logger logger;
 
     /**
+     * Find a loan by ID.
+     *
+     * @param loadId the loan ID
+     * @return the loan
+     */
+    public Loan getLoan(String loadId) {
+        Loan loan = entityManager.getReference(Loan.class, loadId);
+        return loan;
+    }
+
+    /**
      * Return a book with given ISBN on given load.
      *
      * @param isbn   the ISBN
