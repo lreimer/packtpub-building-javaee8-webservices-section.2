@@ -35,6 +35,7 @@
             <scope>test</scope>
         </dependency>
 
+        <!-- unit test dependencies -->
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
@@ -54,6 +55,7 @@
             <scope>test</scope>
         </dependency>
 
+        <!-- the TestContainers dependencies -->
         <dependency>
             <groupId>org.testcontainers</groupId>
             <artifactId>testcontainers</artifactId>
@@ -67,12 +69,14 @@
             <scope>test</scope>
         </dependency>
 
+        <!-- the Jersey Test Framework dependencies -->
         <dependency>
             <groupId>org.glassfish.jersey.test-framework.providers</groupId>
             <artifactId>jersey-test-framework-provider-grizzly2</artifactId>
             <version>${jersey.version}</version>
             <scope>test</scope>
         </dependency>
+
         <dependency>
             <groupId>org.glassfish.jersey.core</groupId>
             <artifactId>jersey-client</artifactId>
