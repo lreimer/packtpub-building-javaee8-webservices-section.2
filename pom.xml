@@ -14,14 +14,8 @@
             <scope>provided</scope>
         </dependency>
 
+        <!-- TODO activate -->
         <!--
-        <dependency>
-            <groupId>com.h2database</groupId>
-            <artifactId>h2</artifactId>
-            <version>1.4.196</version>
-        </dependency>
-        -->
-
         <dependency>
             <groupId>org.glassfish.jersey.core</groupId>
             <artifactId>jersey-client</artifactId>
@@ -40,7 +34,7 @@
             <version>${jersey.version}</version>
             <scope>test</scope>
         </dependency>
-
+        -->
     </dependencies>
 
     <build>
