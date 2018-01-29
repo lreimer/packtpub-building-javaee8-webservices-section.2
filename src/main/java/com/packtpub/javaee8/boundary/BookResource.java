@@ -12,7 +12,6 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriBuilder;
 import java.net.URI;
-import java.util.Objects;
 import java.util.logging.Logger;
 
 /**
@@ -38,6 +37,8 @@ public class BookResource {
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
     public Response create(Book book) {
+        // TODO check if book already exists
+
         bookshelf.create(book);
         URI location = UriBuilder.fromResource(BookResource.class)
                 .path("/{isbn}")
@@ -56,11 +57,8 @@ public class BookResource {
     @PUT
     @Path("/{isbn}")
     public Response update(@PathParam("isbn") String isbn, Book book) {
-        if (!Objects.equals(isbn, book.getIsbn())) {
-            // return Response.status(Response.Status.BAD_REQUEST).build();
-            // throw new WebApplicationException("ISBN must match path parameter.", Response.Status.BAD_REQUEST);
-            throw new BadRequestException("ISBN must match path parameter.");
-        }
+        // TODO check for valid request and ISBN
+
         bookshelf.update(isbn, book);
         return Response.ok().build();
     }
