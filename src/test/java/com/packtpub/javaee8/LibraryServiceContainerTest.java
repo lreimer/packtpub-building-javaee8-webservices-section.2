@@ -21,6 +21,7 @@ import javax.ws.rs.core.Response;
 import java.io.File;
 import java.net.URISyntaxException;
 import java.net.URL;
+import java.time.Duration;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
@@ -33,10 +34,9 @@ public class LibraryServiceContainerTest {
     public static GenericContainer container = new GenericContainer(new ImageFromDockerfile()
             .withFileFromFile("Dockerfile", new File(basePath(), "Dockerfile"))
             .withFileFromFile("target/library-service.war", new File(basePath(), "target/library-service.war")))
-            .waitingFor(Wait.forHttp("/library-service/api/application.wadl"))
-            .withLogConsumer(
-                    new Slf4jLogConsumer(LoggerFactory.getLogger(LibraryServiceContainerTest.class))
-            )
+            .waitingFor(Wait.forHttp("/library-service/api/application.wadl")
+                    .withStartupTimeout(Duration.ofSeconds(90)))
+            .withLogConsumer(new Slf4jLogConsumer(LoggerFactory.getLogger(LibraryServiceContainerTest.class)))
             .withExposedPorts(8080)
             .withExtraHost("localhost", "127.0.0.1");
 
