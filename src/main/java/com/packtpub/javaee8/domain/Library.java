@@ -19,14 +19,14 @@ public class Library {
     private Logger logger;
 
     /**
-     * Find a loan by ID.
+     * Get the loan identified by its ID.
      *
-     * @param loadId the loan ID
+     * @param loanId the loan ID
      * @return the loan
      */
-    public Loan getLoan(String loadId) {
-        Loan loan = entityManager.getReference(Loan.class, loadId);
-        return loan;
+    public Loan loanInfo(String loanId) {
+        logger.log(Level.INFO, "Getting loan with ID {0}.", loanId);
+        return entityManager.getReference(Loan.class, loanId);
     }
 
     /**
