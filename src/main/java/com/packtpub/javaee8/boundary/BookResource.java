@@ -13,7 +13,6 @@ import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriBuilder;
 import java.net.URI;
 import java.util.Objects;
-import java.util.logging.Logger;
 
 /**
  * The Book REST resource implementation.
@@ -26,8 +25,6 @@ public class BookResource {
     private Bookshelf bookshelf;
     @Context
     private ResourceContext context;
-    @Inject
-    private Logger logger;
 
     @GET
     @Produces(MediaType.APPLICATION_JSON)
@@ -38,6 +35,10 @@ public class BookResource {
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
     public Response create(Book book) {
+        if (bookshelf.exists(book.getIsbn())) {
+            return Response.status(Response.Status.CONFLICT).build();
+        }
+
         bookshelf.create(book);
         URI location = UriBuilder.fromResource(BookResource.class)
                 .path("/{isbn}")
@@ -80,8 +81,6 @@ public class BookResource {
 
     @Path("/{isbn}/loans")
     public LoanResource loans(@PathParam("isbn") String isbn) {
-        logger.info("Initialize and return Subresource locator for Loans.");
-
         LoanResource loanResource = context.getResource(LoanResource.class);
         loanResource.setIsbn(isbn);
 

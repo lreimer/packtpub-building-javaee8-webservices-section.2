@@ -52,6 +52,17 @@ public class Bookshelf {
     }
 
     /**
+     * Check if book under given ISBN already exists.
+     *
+     * @param isbn the ISBN
+     * @return true of exists, otherwise false
+     */
+    public boolean exists(String isbn) {
+        logger.log(Level.INFO, "Find book with ISBN {0}.", isbn);
+        return entityManager.find(Book.class, isbn) != null;
+    }
+
+    /**
      * Creates a new book in the bookshelf.
      *
      * @param book a book to create
