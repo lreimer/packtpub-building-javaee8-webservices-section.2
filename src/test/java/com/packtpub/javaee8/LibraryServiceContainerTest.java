@@ -6,7 +6,9 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.ClassRule;
 import org.junit.Test;
+import org.slf4j.LoggerFactory;
 import org.testcontainers.containers.GenericContainer;
+import org.testcontainers.containers.output.Slf4jLogConsumer;
 import org.testcontainers.containers.wait.Wait;
 import org.testcontainers.images.builder.ImageFromDockerfile;
 
@@ -19,6 +21,7 @@ import javax.ws.rs.core.Response;
 import java.io.File;
 import java.net.URISyntaxException;
 import java.net.URL;
+import java.time.Duration;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
@@ -31,7 +34,9 @@ public class LibraryServiceContainerTest {
     public static GenericContainer container = new GenericContainer(new ImageFromDockerfile()
             .withFileFromFile("Dockerfile", new File(basePath(), "Dockerfile"))
             .withFileFromFile("target/library-service.war", new File(basePath(), "target/library-service.war")))
-            .waitingFor(Wait.forHttp("/library-service/api/application.wadl"))
+            .waitingFor(Wait.forHttp("/library-service/api/application.wadl")
+                    .withStartupTimeout(Duration.ofSeconds(90)))
+            .withLogConsumer(new Slf4jLogConsumer(LoggerFactory.getLogger(LibraryServiceContainerTest.class)))
             .withExposedPorts(8080)
             .withExtraHost("localhost", "127.0.0.1");
 
