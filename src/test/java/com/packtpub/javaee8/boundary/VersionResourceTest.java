@@ -2,7 +2,6 @@ package com.packtpub.javaee8.boundary;
 
 import org.glassfish.hk2.utilities.binding.AbstractBinder;
 import org.glassfish.jersey.client.ClientConfig;
-import org.glassfish.jersey.jsonb.JsonBindingFeature;
 import org.glassfish.jersey.server.ResourceConfig;
 import org.glassfish.jersey.test.JerseyTest;
 import org.junit.Test;
@@ -36,8 +35,13 @@ public class VersionResourceTest extends JerseyTest {
 
     @Override
     protected void configureClient(ClientConfig config) {
-        // for JSON-B marshalling
-        config.register(JsonBindingFeature.class);
+        // TODO activate for JSON-B marshalling
+        // config.register(JsonBindingFeature.class);
+    }
+
+    @Test
+    public void v1() {
+        // TODO implement me
     }
 
     @Test
@@ -47,10 +51,4 @@ public class VersionResourceTest extends JerseyTest {
         assertThat(response.readEntity(String.class), is("v2.0"));
     }
 
-    @Test
-    public void v1() {
-        Response response = target("/version/v1").request().get();
-        assertThat(response.getStatus(), is(200));
-        assertThat(response.readEntity(String.class), is("v1.0"));
-    }
 }
