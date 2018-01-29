@@ -40,12 +40,14 @@ public class LibraryServiceContainerTest {
 
     @Before
     public void setUp() {
+        // 1. setup JAX-RS client
         client = ClientBuilder.newBuilder()
                 .connectTimeout(5, TimeUnit.SECONDS)
                 .readTimeout(5, TimeUnit.SECONDS)
                 .register(JsonBindingFeature.class)
                 .build();
 
+        // 2. setup WebTarget agains container URI
         String uri = String.format("http://%s:%s/library-service/api",
                 container.getContainerIpAddress(), container.getMappedPort(8080));
         api = client.target(uri);
