@@ -6,6 +6,7 @@ import javax.enterprise.inject.Produces;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.PersistenceUnit;
+import javax.persistence.SynchronizationType;
 
 /**
  * CDI producer bean to manage {@link EntityManager} instances for
@@ -25,7 +26,7 @@ public class EntityManagerProducer {
     @Produces
     @RequestScoped
     public EntityManager createEntityManager() {
-        return entityManagerFactory.createEntityManager();
+        return entityManagerFactory.createEntityManager(SynchronizationType.SYNCHRONIZED);
     }
 
     /**

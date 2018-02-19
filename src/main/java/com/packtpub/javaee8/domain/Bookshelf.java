@@ -19,9 +19,9 @@ import java.util.logging.Logger;
  * The Bookshelf implementation is used to find and managed books.
  */
 @ApplicationScoped
-@Transactional(Transactional.TxType.REQUIRED)
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor(access = AccessLevel.PROTECTED)
+@Transactional(Transactional.TxType.REQUIRED)
 public class Bookshelf {
 
     @Inject
@@ -67,6 +67,7 @@ public class Bookshelf {
      *
      * @param book a book to create
      */
+    @Transactional(Transactional.TxType.REQUIRED)
     public void create(Book book) {
         Objects.requireNonNull(book);
         logger.log(Level.INFO, "Creating {0}.", book);
@@ -78,6 +79,7 @@ public class Bookshelf {
      *
      * @param book a book to update
      */
+    @Transactional(Transactional.TxType.REQUIRED)
     public void update(String isbn, Book book) {
         Objects.requireNonNull(book);
         logger.log(Level.INFO, "Updating {0} using ISBN {1}.", new Object[]{book, isbn});
@@ -89,6 +91,7 @@ public class Bookshelf {
      *
      * @param isbn the ISBN
      */
+    @Transactional(Transactional.TxType.REQUIRED)
     public void delete(String isbn) {
         Objects.requireNonNull(isbn);
         logger.log(Level.INFO, "Deleting book with ISBN {0}.", isbn);

@@ -33,12 +33,7 @@ public class BookResource {
     }
 
     @POST
-    @Consumes(MediaType.APPLICATION_JSON)
     public Response create(Book book) {
-        if (bookshelf.exists(book.getIsbn())) {
-            return Response.status(Response.Status.CONFLICT).build();
-        }
-
         bookshelf.create(book);
         URI location = UriBuilder.fromResource(BookResource.class)
                 .path("/{isbn}")
