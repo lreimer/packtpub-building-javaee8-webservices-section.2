@@ -11,7 +11,7 @@ In this video we are going to implement a basic REST API for books.
 | GET    | /api/books | 200 | Get the list of all books |
 | POST   | /api/books | 201 | Create a new book from JSON body |
 | PUT    | /api/books/{isbn} | 200 | Update a book with given ISBN |
-| DELETE | /api/books/{isbn} | 200 | Delete a book with given ISBN | 
+| DELETE | /api/books/{isbn} | 200 | Delete a book with given ISBN |
 
 
 ### Video 2.2: Subresource Locators
@@ -24,7 +24,7 @@ a sub resource (since loans are dependent on books).
 | GET    | /api/books/{isbn}/author | 200 | Get the author for given book |
 | GET    | /api/books/{isbn}/loans | 200 | Get the loans for given book |
 | POST   | /api/books/{isbn}/loans | 201 | Create a new loan on a given book |
-| DELETE | /api/books/{isbn}/loans/{loanId} | 200 | Delete a loan and return given book | 
+| DELETE | /api/books/{isbn}/loans/{loanId} | 200 | Delete a loan and return given book |
 
 Now there are several ways to implement Subresource locators. In all cases
 you can perform partial processing by annotating methods using @Path only.
@@ -50,19 +50,19 @@ and perform a custom mapping from exception to `Response`.
 
 In this video we add a small standalone CLI client program that uses
 the JAX-RS Client APIs to access the Library Service REST API. The
-client performs several CRUD interactions with `Book` and `Loan`. 
+client performs several CRUD interactions with `Book` and `Loan`.
 
 ## Containerization
 
 When you want to use the Payara Server Full base image, write the following `Dockerfile`:
 ```
-FROM payara/server-full:5-SNAPSHOT
+FROM payara/server-full:5.181
 COPY target/library-service.war $DEPLOY_DIR
 ```
 
 When you want to use the Payara Micro base image, write the following `Dockerfile`:
 ```
-FROM payara/micro:5-SNAPSHOT
+FROM payara/micro:5.181
 COPY target/library-service.war /opt/payara/deployments
 ```
 
